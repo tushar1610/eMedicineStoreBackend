@@ -5,6 +5,8 @@ import com.example.eMedicineStore.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class MedicineController {
 
@@ -30,4 +32,8 @@ public class MedicineController {
         return medicineService.deleteMedicineById(medicineId);
     }
 
+    @GetMapping("/searchMedicineByKeyword")
+    public List<Medicine> searchMedicineByKeyword(@RequestParam("keyword") String keyword){
+        return medicineService.searchMedicineByKeyword(keyword);
+    }
 }

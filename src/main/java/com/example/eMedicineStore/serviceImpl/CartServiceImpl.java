@@ -11,7 +11,6 @@ import com.example.eMedicineStore.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,5 +63,11 @@ public class CartServiceImpl implements CartService {
     public String deleteCartById(Long cartId) {
         cartRepository.deleteById(cartId);
         return "Deletion successful";
+    }
+
+    @Override
+    public void deleteCartByUserUserId(Long userId) {
+        Cart cart = cartRepository.findByUserUserId(userId);
+        cartRepository.deleteById(cart.getCartId());
     }
 }

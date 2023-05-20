@@ -46,4 +46,14 @@ public class OrderServiceImpl implements OrderService {
         order.setDate(LocalDate.now().toString());
         return orderRepository.save(order);
     }
+
+    @Override
+    public void cancelOrder(Long orderId) {
+        Optional<Order> order = orderRepository.findById(orderId);
+        if (order.isPresent()){
+            order.get().setStatus("Cancelled");
+        }
+        orderRepository.save(order.get());
+    }
+
 }

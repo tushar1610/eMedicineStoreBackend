@@ -6,6 +6,7 @@ import com.example.eMedicineStore.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,5 +38,10 @@ public class MedicineServiceImpl implements MedicineService {
     public String deleteMedicineById(Long medicineId) {
         medicineRepository.deleteById(medicineId);
         return "Deletion successful";
+    }
+
+    @Override
+    public List<Medicine> searchMedicineByKeyword(String keyword) {
+        return medicineRepository.findByMedicineNameContaining(keyword);
     }
 }

@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 public class OrderItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderItemId;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "order_medicine_id", referencedColumnName = "medicineId")
     private Medicine medicine;
     private Integer quantity;
