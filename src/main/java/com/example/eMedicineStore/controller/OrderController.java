@@ -1,5 +1,6 @@
 package com.example.eMedicineStore.controller;
 
+import com.example.eMedicineStore.entity.Cart;
 import com.example.eMedicineStore.entity.Order;
 import com.example.eMedicineStore.service.CartService;
 import com.example.eMedicineStore.service.OrderService;
@@ -21,8 +22,9 @@ public class OrderController {
     }
 
     @PostMapping("/addOrder")
-    public Order addOrder(@RequestBody Order order){
-        Order savedOrder = orderService.addOrder(order);
+    public Order addOrder(@RequestBody Cart cart){
+        Cart cart1 = cartService.addToCart(cart);
+        Order savedOrder = orderService.addOrder(cart1);
         if (savedOrder != null){
             cartService.deleteCartByUserUserId(savedOrder.getUser().getUserId());
             return savedOrder;

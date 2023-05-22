@@ -20,6 +20,5 @@ public class OrderItem {
     @JoinColumn(name = "order_medicine_id", referencedColumnName = "medicineId")
     private Medicine medicine;
     private Integer quantity;
-    private Double amount;
 
 }

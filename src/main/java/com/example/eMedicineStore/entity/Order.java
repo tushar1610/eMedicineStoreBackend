@@ -32,4 +32,5 @@ public class Order {
     @JoinColumn(name = "order_order_item_id", referencedColumnName = "orderId")
     private List<OrderItem> orderItems;
 
+
 }

@@ -1,5 +1,6 @@
 package com.example.eMedicineStore.service;
 
+import com.example.eMedicineStore.entity.Cart;
 import com.example.eMedicineStore.entity.Order;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Service;
 public interface OrderService {
     Order getOrderById(Long orderId);
 
-    Order addOrder(Order order);
+    Order addOrder(Cart cart);
 
     void cancelOrder(Long orderId);
 }
