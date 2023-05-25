@@ -5,6 +5,8 @@ import com.example.eMedicineStore.repository.MedicineRepository;
 import com.example.eMedicineStore.repository.OrderRepository;
 import com.example.eMedicineStore.repository.UserRepository;
 import com.example.eMedicineStore.service.OrderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.Optional;
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    public static final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
     @Autowired
     private OrderRepository orderRepository;
 
@@ -27,24 +30,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getOrderById(Long orderId) {
+        logger.info("Found order by ID successfully!");
         return orderRepository.findById(orderId).get();
     }
 
     @Override
     public Order addOrder(Cart cart) {
-//        Optional<User> user = userRepository.findById(order.getUser().getUserId());
-//        if (user.isPresent()){
-//            order.setUser(user.get());
-//        }
-//        List<OrderItem> orderItemList = order.getOrderItems();
-//        for (int i = 0; i < orderItemList.size(); i++) {
-//            Optional<Medicine> medicine = medicineRepository.findById(orderItemList.get(i).getMedicine().getMedicineId());
-//
-//            if (medicine.isPresent()){
-//                orderItemList.get(i).setMedicine(medicine.get());
-//            }
-//        }
-//        order.setDate(LocalDate.now().toString());
         List<OrderItem> orderItems = new ArrayList<>();
         for (CartItem cartItem : cart.getCartItems()) {
             OrderItem item = OrderItem.builder()
@@ -60,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
                 .status("Processing")
                 .totalAmount(calculateTotalAmount(cart.getCartItems()))
                 .build();
+        logger.info("Saved order successfully!");
         return orderRepository.save(order);
     }
 
@@ -78,6 +70,7 @@ public class OrderServiceImpl implements OrderService {
             order.get().setStatus("Cancelled");
         }
         orderRepository.save(order.get());
+        logger.info("Order is saved");
     }
 
 }

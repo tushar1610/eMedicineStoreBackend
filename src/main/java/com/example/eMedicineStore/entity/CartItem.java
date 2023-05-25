@@ -20,5 +20,6 @@ public class CartItem {
     @JoinColumn(name = "medicineId", referencedColumnName = "medicineId")
     private Medicine medicine;
     private Integer quantity;
+    private Double amount;
 
 }
