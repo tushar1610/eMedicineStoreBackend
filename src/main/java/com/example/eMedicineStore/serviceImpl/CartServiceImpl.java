@@ -89,6 +89,7 @@ public class CartServiceImpl implements CartService {
                         .findFirst();
                 if (updatedCartItemOptional.isPresent()){
                     cartItem.setQuantity(updatedCartItemOptional.get().getQuantity());
+                    cartItem.setAmount(updatedCartItemOptional.get().getQuantity()* cartItem.getMedicine().getPrice());
                 }
             }
             List<CartItem> cartItems = cartItemRepository.saveAll(cartItemsToUpdate);
