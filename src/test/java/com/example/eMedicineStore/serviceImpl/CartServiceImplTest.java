@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,12 +20,12 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class CartServiceImplTest {
 
-    @Mock
+    @MockBean
     private CartRepository cartRepository;
 
     @Autowired
@@ -66,7 +67,7 @@ class CartServiceImplTest {
 
         Cart createdCart = cartService.addToCart(cart);
 
-        assertNotNull(createdCart);
+        verify(cartRepository, times(1)).save(cart);
     }
 
     @Test
